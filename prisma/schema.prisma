@@ -1,0 +1,59 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Get a free hosted Postgres database in seconds: `npx create-db`
+
+generator client {
+  provider = "prisma-client-js"
+  output   = "../generated/prisma"
+}
+
+datasource db {
+  provider = "mysql"
+}
+
+model Merek {
+  id_merek   Int    @id @default(autoincrement())
+  nama_merek String
+
+  shoes Shoes[]
+}
+
+model ShoesType {
+  id_type Int    @id @default(autoincrement())
+  type_name     String
+
+  shoes Shoes[]
+}
+
+model Shoes {
+  id_shoes      Int    @id @default(autoincrement())
+  name          String
+  color         String
+
+  id_type Int
+  id_merek      Int
+
+  shoesType ShoesType @relation(fields: [id_type], references: [id_type])
+  merek     Merek     @relation(fields: [id_merek], references: [id_merek])
+
+  sizes  Size[]
+  prices Price[]
+}
+
+model Size {
+  id_size   Int @id @default(autoincrement())
+  id_shoes  Int
+  stock_qty Int
+
+  shoes Shoes @relation(fields: [id_shoes], references: [id_shoes])
+}
+
+model Price {
+  id_price       Int      @id @default(autoincrement())
+  id_shoes       Int
+
+  amount         Decimal  @db.Decimal(10,2)
+
+  shoes Shoes @relation(fields: [id_shoes], references: [id_shoes])
+}
