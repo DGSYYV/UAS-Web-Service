@@ -1,18 +1,11 @@
 import express from "express";
 const router = express.Router();
-import categories from "../controllers/categoryController.js";
-import news from "../controllers/newsController.js";
+import * as shoesTypeController from "../controllers/shoesTypeController.js";
 
-router.get("/categories", categories.getAll);
-router.get("/categories/:id", categories.getById);
-router.post("/categories", categories.create);
-router.put("/categories/:id", categories.update);
-router.delete("/categories/:id", categories.destroy);
-
-router.get("/news", news.getAll);
-router.get("/news/:id", news.getById);
-router.post("/news", news.create);
-router.put("/news/:id", news.update);
-router.delete("/news/:id", news.destroy);
+router.get("/shoes-type",shoesTypeController.getAll);
+router.get("/shoes-type/:id",shoesTypeController.getById);
+router.post("/shoes-type",shoesTypeController.create);
+router.put("/shoes-type/:id",shoesTypeController.update);
+router.delete("/shoes-type/:id",shoesTypeController.remove);
 
 export default router;
