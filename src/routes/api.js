@@ -15,6 +15,12 @@ router.get("/merek/:id", authMiddleware, merekController.getById);
 router.put("/merek/:id", authMiddleware, merekController.update);
 router.delete("/merek/:id", authMiddleware, merekController.remove);
 
+router.get("/shoes-type",shoesTypeController.getAll);
+router.get("/shoes-type/:id",shoesTypeController.getById);
+router.post("/shoes-type",shoesTypeController.create);
+router.put("/shoes-type/:id",shoesTypeController.update);
+router.delete("/shoes-type/:id",shoesTypeController.remove);
+
 router.get("/price", authMiddleware, priceController.getAll);
 router.get("/price/:id", authMiddleware, priceController.getById);
 router.post("/price", authMiddleware, priceController.create);
