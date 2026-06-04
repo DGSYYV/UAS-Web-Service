@@ -1,10 +1,19 @@
 import express from "express";
-const router = express.Router();
-import * as shoesTypeController from "../controllers/shoesTypeController.js";
+import jwt from "../middleware/jwtAuth.js";
 import * as priceController from "../controllers/priceController.js";
 import * as sizeController from "../controllers/sizeController.js";
 import * as shoesController from "../controllers/shoesController.js";
+import * as auth from "../controllers/authController.js";
+import * as merekController from "../controllers/merekController.js";
 import { authMiddleware } from "../middleware/authMiddleware.js";
+const router = express.Router();
+
+router.post("/auth",auth.login);
+router.post("/merek", authMiddleware, merekController.create);
+router.get("/merek", authMiddleware, merekController.getAll);
+router.get("/merek/:id", authMiddleware, merekController.getById);
+router.put("/merek/:id", authMiddleware, merekController.update);
+router.delete("/merek/:id", authMiddleware, merekController.remove);
 
 router.get("/shoes-type",shoesTypeController.getAll);
 router.get("/shoes-type/:id",shoesTypeController.getById);
